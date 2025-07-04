@@ -2,6 +2,9 @@ const express = require('express');
 const router = express.Router();
 const tarefaController = require('../controllers/tarefaController.js');
 
-router.get('/', tarefaController.listarTarefas);
+router.get('/tarefas', tarefaController.listarTarefas);
+router.post('/tarefas', tarefaController.criarTarefa);
+router.put('/tarefas/:id', tarefaController.atualizarTarefa);
+router.delete('/tarefas/:id', tarefaController.deletarTarefa);
 
-module.exports = router;
+module.exports = router; 
