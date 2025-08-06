@@ -7,14 +7,14 @@ async function listarQuerry() {
 
 async function criarQuerry(titulo, descricao, status, prioridade, data_entrega) {
     await db.query(
-        "INSERT INTO tarefas (Titulo, Descricao, status, prioridade, data_entrega) VALUES (?, ?, ?, ?, ?)",
+        "INSERT INTO tarefas (titulo, descricao, status, prioridade, data_entrega) VALUES (?, ?, ?, ?, ?)",
         [titulo, descricao, status, prioridade, data_entrega]
     );
 }
 
 async function atualizarQuerry(id, titulo, descricao, status, prioridade, data_entrega) {
     const [resultado] = await db.query(
-        "UPDATE tarefas SET Titulo = ?, Descricao = ?, status = ?, prioridade = ?, data_entrega = ? WHERE id = ?",
+        "UPDATE tarefas SET titulo = ?, descricao = ?, status = ?, prioridade = ?, data_entrega = ? WHERE id = ?",
         [titulo, descricao, status, prioridade, data_entrega, id]
     );
     return resultado.affectedRows;

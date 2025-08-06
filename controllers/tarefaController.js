@@ -1,4 +1,4 @@
-const tarefasServices = require('../services/tarefasServices');
+const tarefasServices = require('../services/tarefasServices.js');
  
 async function listarTarefas(req, res) {
   try {
@@ -12,7 +12,7 @@ async function listarTarefas(req, res) {
 async function criarTarefa(req, res) {
   try {
     const { titulo, descricao, status, prioridade, data_entrega } = req.body;
-    if (!titulo || !descricao) {
+    if (!titulo) {
       return res.status(400).json({ erro: 'Campos obrigatórios não informados' });
     }
     await tarefasServices.criarQuerry(titulo, descricao, status, prioridade, data_entrega);
