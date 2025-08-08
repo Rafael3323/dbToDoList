@@ -26,21 +26,36 @@ async function criarTarefa(req, res) {
 async function atualizarTarefa(req, res) {
   try {
     const { id } = req.params;
-    const { descricao } = req.body;
-    await tarefasServices.atualizarQuerry(id, descricao);
+    const { titulo, descricao, status, prioridade, data_entrega } = req.body;
+
+    const linhasAfetadas = await tarefasServices.atualizarQuerry(
+      id,
+      titulo,
+      descricao,
+      status,
+      prioridade,
+      data_entrega
+    );
+
+    if (linhasAfetadas === 0) {
+      return res.status(404).json({ erro: 'Tarefa não encontrada' });
+    }
+
     res.status(200).json({ message: 'Tarefa atualizada com sucesso' });
   } catch (erro) {
+    console.error(erro);
     res.status(500).json({ erro: 'Erro ao atualizar tarefa' });
   }
 }
- 
 async function deletarTarefa(req, res) {
   try {
     const { id } = req.params;
     await tarefasServices.deletarQuerry(id);
     res.status(200).json({ message: 'Tarefa deletada com sucesso' });
+    console.log("deletou aki")
   } catch (erro) {
     res.status(500).json({ erro: 'Erro ao deletar tarefa' });
+
   }
 }
  
